@@ -76,9 +76,13 @@ flowchart TD
 
 ### Pillar 2: Relational SQL Database (`@aether/db`)
 * **Replaces:** Supabase ($25/mo), Neon ($19/mo).
-* **Underlying Engine:** Cloudflare D1 (Serverless SQLite over global Raft consensus).
+* **Underlying Engine:** Cloudflare D1 (Serverless SQLite over global Raft consensus) + Backblaze B2 Cold Snapshot Archiving.
 * **Free Quota:** 500 MB database storage + 100k reads / 25k writes per day.
-* **Smart Sleep Engine:** Databases with 0 traffic for 14 days enter dormant cold-storage (costing $0.00). Upon receiving an incoming query, the edge router auto-wakes the instance in $<50$ms—eliminating Supabase's fatal 500-error pause behavior.
+* **The 3-Day Inactivity & Sub-60ms Auto-Wake Engine:**
+  * Active databases execute in Cloudflare D1 / Worker memory with sub-millisecond query latency.
+  * If a project receives 0 incoming HTTP traffic for **3 consecutive days**, the edge orchestrator exports and compresses the `.sqlite` snapshot directly into **Backblaze B2 cold storage ($0.006/GB)**.
+  * When a new request arrives on Day 4 or Day 40, the edge worker streams the snapshot back into memory via the **Cloudflare Bandwidth Alliance ($0 egress)** in **under 60 milliseconds**.
+  * The visitor experiences **zero errors and imperceptible latency (<60ms)**, while idle databases cost AetherEdge virtually $0.00.
 
 ### Pillar 3: Zero-Egress Object Storage (`@aether/storage`)
 * **Replaces:** AWS S3 ($0.09/GB egress), Vercel Blob ($0.15/GB egress), UploadThing ($15/mo).
@@ -166,7 +170,7 @@ To protect the platform from crypto-miners, scraping botnets, and pirate file ho
 |  • 1 GB B2 Storage ($0 Egress)         • 50 GB B2 Storage ($0 Egress)     • 250 GB B2 Storage    |
 |  • 1,000 Outbound Emails / mo          • 50,000 Outbound Emails / mo      • 250,000 Emails       |
 |  • 1,000 Auth MAUs                     • 25,000 Auth MAUs                 • 100,000 Auth MAUs    |
-|  • 14-Day Inactivity Auto-Sleep        • NEVER PAUSES (Always Hot Cache)  • Multi-Seat Access    |
+|  • 3-Day Inactivity Auto-Sleep         • NEVER PAUSES (Always Hot Cache)  • Multi-Seat Access    |
 |  • Commercial Use Allowed              • 100% White-Label (No badge)      • Priority Support     |
 |  • Powered by AetherEdge badge         • Custom Apex Domains (SSL)        • Dedicated SLA        |
 +--------------------------------------------------------------------------------------------------+
