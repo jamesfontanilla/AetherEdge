@@ -56,7 +56,9 @@ Or connect your GitHub repository for automatic preview and production deploymen
 
 ## 📖 Architecture & Documentation
 
-Read the full system architecture, anti-abuse defenses, and unit economic proofs in [docs/SYSTEM_ARCHITECTURE.md](docs/SYSTEM_ARCHITECTURE.md).
+* Read the full system architecture, anti-abuse defenses, and unit economic proofs in [docs/SYSTEM_ARCHITECTURE.md](docs/SYSTEM_ARCHITECTURE.md).
+* Explore the [AetherEdge Startup Program (Aether Catalyst)](docs/STARTUP_PROGRAM.md) for eligibility, anti-exploit rules, and credit allocations.
+* Review the [UI / UX / DX Specification](docs/UI_UX_DX_SPECIFICATION.md) for terminal workflows, MCP tools, and web console architecture.
 
 ---
 

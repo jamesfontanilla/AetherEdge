@@ -1,0 +1,15 @@
+{
+  "name": "aether-edge-gateway",
+  "version": "1.0.0",
+  "description": "Master Cloudflare Anycast Worker router for dynamic subdomains and edge dispatch",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241022.0",
+    "typescript": "^5.6.3",
+    "wrangler": "^3.84.0"
+  }
+}

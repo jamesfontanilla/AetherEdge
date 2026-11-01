@@ -1,0 +1,24 @@
+name = "aether-edge-gateway"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ENVIRONMENT = "production"
+DEFAULT_UPSTREAM = "https://aether.run"
+B2_BANDWIDTH_ALLIANCE_ENDPOINT = "https://f000.backblazeb2.com"
+
+# Pillar 2: D1 Relational SQL Database Binding
+[[d1_databases]]
+binding = "AETHER_DB"
+database_name = "aether_primary_d1"
+database_id = "00000000-0000-0000-0000-000000000000"
+
+# Pillar 6: In-Memory KV Cache Binding
+[[kv_namespaces]]
+binding = "AETHER_KV"
+id = "aether_kv_state_cache"
+
+# Edge AI Gateway Proxy
+[ai]
+binding = "AI"
