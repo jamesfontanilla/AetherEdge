@@ -4,7 +4,7 @@ compatibility_date = "2026-10-01"
 compatibility_flags = ["nodejs_compat"]
 
 routes = [
-  { pattern = "aetheredge.jamesfontanilla.com/*", zone_name = "jamesfontanilla.com" }
+  { pattern = "aetheredge.jamesfontanilla.com", custom_domain = true }
 ]
 workers_dev = true
 
